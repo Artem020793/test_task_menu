@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %} {%block title%} Список меню {%endblock%} {% block content %}
 <table class="table mt-5 table-bordered table-strited table-hover">
   <thead class="table-info">
     <tr>
@@ -7,10 +7,44 @@
     </tr>
   </thead>
   <tbody>
-    {% for menu in menu %}
+    {% for menu in menus %}
     <tr>
-      <td>{{menu.title}}</td>
-      <td><button class="btn btn-primary">Просмотр меню</button></td>
+      <td><a href={% url "menu:menu_detail" menu.id %}> {{menu.title}} </a></td>
+      <td><button class="btn btn-primary" onclick="showContent()">Просмотр меню через template tag</button></td>
+      <template>
+        <h1 class="mt-5">{{menu.title}}</h1>
+<div class="card" style="width: 40rem">
+  <div class="card-body">
+    <p class="card-text">
+      <table class="table mt-5 table-bordered table-strited table-hover">
+        <thead class="table-info">
+          <tr>
+            <th>Название блюда</th>
+            <th>Колличество грамм</th>
+            <th>Цена</th>
+          </tr> 
+        </thead>
+        <tbody>
+          {% for dish in dishes %}
+          <tr>
+              <td>{{dish.name}}</td>
+              <td>{{dish.amount}}</td>
+              <td>{{dish.price}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+    </p>
+  </div>
+</div>
+      </template>
+      <script>
+        function showContent() {
+          var temp = document.getElementsByTagName("template")[0];
+          var clon = temp.content.cloneNode(true);
+          document.body.appendChild(clon);
+        }
+      </script>
     </tr>
     {% endfor%}
   </tbody>

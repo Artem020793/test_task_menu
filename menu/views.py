@@ -1,19 +1,15 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from .models import Menu
+from django.shortcuts import render, get_object_or_404
+from .models import Menu, Dish
 
 
 def index(request):
-    menu = Menu.objects.all()
-    context = {
-        'menu': menu,
-    }
-    return render(request, 'index.html', context)
+    menus = Menu.objects.all()
+    dishes = Dish.objects.all()
+    return render(request, 'index.html', {'menus': menus, 'dishes': dishes})
 
 
-def menu_group(request):
-    return HttpResponse('Fuct 2')
-
-
-def menu_detail(request):
-    return HttpResponse('Furcr3')
+def menu_detail(request, menu_id):
+    menu = get_object_or_404(Menu, pk=menu_id)
+    dishes = Dish.objects.all()
+    return render(request, 'menu_detail.html', {'menu': menu,
+                                                'dishes': dishes})

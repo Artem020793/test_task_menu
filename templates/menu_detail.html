@@ -1,0 +1,27 @@
+{% extends 'base.html'%} {% block title %} {{menu.title}}{%endblock%} {% block content %}
+<h1 class="mt-5">{{menu.title}}</h1>
+<div class="card" style="width: 50rem">
+  <div class="card-body">
+    <p class="card-text">
+      <table class="table mt-5 table-bordered table-strited table-hover">
+        <thead class="table-info">
+          <tr>
+            <th>Название блюда</th>
+            <th>Колличество грамм</th>
+            <th>Цена</th>
+          </tr> 
+        </thead>
+        <tbody>
+          {% for dish in dishes %}
+          <tr>
+              <td>{{dish.name}}</td>
+              <td>{{dish.amount}}</td>
+              <td>{{dish.price}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+    </p>
+  </div>
+</div>
+{% endblock%}
