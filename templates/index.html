@@ -1,0 +1,18 @@
+{% extends "base.html" %} {% block content %}
+<table class="table mt-5 table-bordered table-strited table-hover">
+  <thead class="table-info">
+    <tr>
+      <th>Название меню ресторана</th>
+      <th>Сылка на меню</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for menu in menu %}
+    <tr>
+      <td>{{menu.title}}</td>
+      <td><button class="btn btn-primary">Просмотр меню</button></td>
+    </tr>
+    {% endfor%}
+  </tbody>
+</table>
+{% endblock %}
